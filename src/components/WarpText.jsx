@@ -177,8 +177,8 @@ const buildTextCanvas = ({ container, width, height, dpr, props }) => {
   };
   applyFont();
 
-  const maxWidth = width * 0.86;
-  const maxHeight = height * 0.78;
+  const maxWidth = width * 0.96;
+  const maxHeight = height * 0.94;
   const widest = Math.max(...lines.map(line => measureLine(ctx, line, letterSpacing)), 1);
   const blockHeight = Math.max(lineHeight * lines.length, 1);
   const fit = Math.min(1, maxWidth / widest, maxHeight / blockHeight);
@@ -191,7 +191,10 @@ const buildTextCanvas = ({ container, width, height, dpr, props }) => {
   }
 
   const startY = height / 2 - (lineHeight * (lines.length - 1)) / 2;
-  lines.forEach((line, index) => drawLine(ctx, line, width / 2, startY + index * lineHeight, letterSpacing));
+  lines.forEach((line, index) => {
+    ctx.fillStyle = props.lineColors?.[index] || props.color;
+    drawLine(ctx, line, width / 2, startY + index * lineHeight, letterSpacing);
+  });
 
   return canvas;
 };
@@ -210,6 +213,7 @@ const syncUniforms = (program, props) => {
 const WarpText = ({
   text = 'Bend the moment',
   color = '#f8f5ff',
+  lineColors,
   warpStrength = 0.08,
   warpScale = 1.7,
   speed = 0.55,
@@ -231,6 +235,7 @@ const WarpText = ({
   const propsRef = useRef({
     text,
     color,
+    lineColors,
     fontSize,
     fontWeight,
     fontFamily,
@@ -250,6 +255,7 @@ const WarpText = ({
     propsRef.current = {
       text,
       color,
+      lineColors,
       fontSize,
       fontWeight,
       fontFamily,
@@ -271,6 +277,7 @@ const WarpText = ({
   }, [
     text,
     color,
+    lineColors,
     fontSize,
     fontWeight,
     fontFamily,
