@@ -1,0 +1,14 @@
+/* Preserve elo's native labels, backgrounds, sizes, focus rings, and actions. */
+:where(.has-specular) { position: relative; }
+.has-specular { isolation: isolate; }
+.has-specular.dialog-close { position: absolute; }
+.has-specular.button, .has-specular.filter-button, .section-nav .has-specular { border-radius: 18px; }
+.has-specular.icon-button { border-radius: 50%; }
+.faq-list summary.has-specular { border-radius: 12px; }
+.has-specular > .specular-button__fx { display: block; inset: -20px; pointer-events: none; transform: none !important; transition: none; }
+.has-specular .specular-button__fx canvas { border-radius: 0; }
+.has-specular::after { opacity: 0 !important; }
+@media (prefers-reduced-motion: reduce), (hover: none) {
+  .has-specular .specular-button__fx { display: none; }
+}
+@media print { .specular-button__fx { display: none; } }
