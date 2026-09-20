@@ -34,3 +34,10 @@ O Folder vem de https://reactbits.dev/r/Folder-JS-CSS.json e não declara depend
 O SpecularButton acompanha também os controles inseridos dinamicamente. As medidas de layout mantêm a borda alinhada em elementos transformados.
 
 A base da identidade usa preto, branco e cinza. Pastas e botões usam azul-marinho com texto branco. O WarpText mantém a distorção, com refraction=0 na integração para evitar franjas coloridas. As fotografias preservam suas cores originais.
+
+
+FoldText e BubbleMenu foram instalados a partir de https://reactbits.dev/r/FoldText-JS-CSS.json e https://reactbits.dev/r/BubbleMenu-JS-CSS.json. Ambos declaram gsap@^3.13.0. Os arquivos foram restaurados diretamente dos JSONs antes da adaptação para preservar escapes.
+
+FoldText mantém a animação e os parâmetros de dobra originais. A integração usa trigger=mount para repetir a cada abertura da resposta, fonte e cor herdadas e stagger limitado a 0,65 segundo no parágrafo inteiro. A divisão por caracteres agrupa palavras para evitar quebras no meio delas. Movimento reduzido exibe tudo imediatamente.
+
+BubbleMenu ganhou modo inline para preservar os links do rodapé visíveis e acessíveis, com entrada por IntersectionObserver, rotação suave de 5 graus, paleta azul-marinho e GSAP com limpeza ao desmontar. O modo inline usa navegação comum, sem semântica de menu de aplicativo.
