@@ -10,7 +10,7 @@ Site conceitual de um provedor de internet residencial, com identidade original,
 
 ## Executar localmente
 
-As páginas usam HTML, CSS e JavaScript, com efeitos React na página inicial: WarpText, GradualBlur e LetterGlitch, do React Bits. Os arquivos publicados em `dist` já incluem o bundle dos efeitos.
+As páginas usam HTML, CSS e JavaScript, com efeitos React na página inicial: WarpText, GradualBlur, LetterGlitch, Folder e SpecularButton, do React Bits. Os arquivos publicados em `dist` já incluem o bundle dos efeitos.
 
 Para editar os componentes React, instale Node.js e pnpm, depois execute:
 
@@ -19,7 +19,7 @@ pnpm install --frozen-lockfile
 pnpm run build
 ```
 
-O build gera apenas `dist/assets/effects.js`, `effects.css` e os avisos de licença. Ele preserva os arquivos HTML, estilos e imagens existentes. Após alterações em `src`, gere novamente o bundle antes de publicar.
+O build gera `dist/assets/effects.js`, `effects.css`, `specular-buttons.js`, `specular-buttons.css` e os avisos de licença. Ele preserva os arquivos HTML, estilos e imagens existentes. Após alterações em `src`, gere novamente o bundle antes de publicar.
 
 Na pasta do projeto, execute com Python 3:
 
@@ -40,10 +40,15 @@ dist/
   pages.css             # Estilos das páginas internas
   app.js                # Tema, menu, detalhes de planos e filtros
   assets/living-room.png
-  assets/effects.*      # Bundle React gerado e avisos de licença
+  assets/effects.*      # Efeitos da abertura e avisos de licença
+  assets/specular-buttons.* # Brilho dos botões nas três páginas
 src/
   effects.jsx          # Integração dos efeitos e alternativa estática
+  plan-folders.jsx     # Pastas dos três planos e pop-ups de vantagens
+  plan-folders.css     # Pastas verdes responsivas e janelas de detalhes
   warp-section.css     # Composição visual das ilhas React
+  specular-buttons.jsx # Integração do brilho com os controles HTML existentes
+  specular-buttons.css # Ajustes visuais dos botões
   components/          # Componentes JS-CSS do registro oficial React Bits
 scripts/build.mjs      # Bundle isolado com esbuild
 DESIGN-SYSTEM.md         # Direção visual e regras de interface
@@ -55,8 +60,9 @@ Os arquivos em `dist` são o código-fonte editável e devem permanecer versiona
 ## Interações e acessibilidade
 
 - Tema persistido no navegador e preferência inicial do sistema.
+- SpecularButton nos botões, ações de plano, filtros, menu, tema, navegação de serviços e perguntas frequentes. O shader usa a configuração solicitada; as cores, rótulos e ações originais permanecem. Apenas os controles visíveis criam canvas, e a renderização para quando o brilho se estabiliza. Em toque, movimento reduzido ou sem WebGL 2, os controles mantêm o comportamento nativo.
 - Navegação mobile com estado acessível.
-- Detalhes de planos em diálogo nativo, com retorno do foco.
+- Uma pasta interativa em cada plano, com arquivos clicáveis de velocidade, Wi-Fi e usos. Os detalhes abrem em diálogo nativo, com Escape, foco contido e retorno ao arquivo. Uma única pasta fica aberta por vez; toque e teclado são suportados.
 - Filtros de relatos com indicação da seleção e contagem anunciada.
 - Navegação por teclado, foco visível, HTML semântico e redução de movimento.
 - Uma única instância de WarpText no título principal, preservando o texto, as quebras responsivas e as duas cores da identidade. Os parâmetros de distorção seguem a configuração solicitada; a tipografia e a altura acompanham o título existente. A GPU só é inicializada perto da área visível; o componente pausa a renderização fora da tela e quando a aba está oculta.
