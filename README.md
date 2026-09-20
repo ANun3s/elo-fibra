@@ -10,7 +10,16 @@ Site conceitual de um provedor de internet residencial, com identidade original,
 
 ## Executar localmente
 
-O projeto usa HTML, CSS e JavaScript puros. Não requer instalação de pacotes ou etapa de build.
+As páginas usam HTML, CSS e JavaScript, com duas ilhas React na página inicial: WarpText e GradualBlur, do React Bits. Os arquivos publicados em `dist` já incluem o bundle dos efeitos.
+
+Para editar os componentes React, instale Node.js e pnpm, depois execute:
+
+```sh
+pnpm install --frozen-lockfile
+pnpm run build
+```
+
+O build gera apenas `dist/assets/effects.js`, `effects.css` e os avisos de licença. Ele preserva os arquivos HTML, estilos e imagens existentes. Após alterações em `src`, gere novamente o bundle antes de publicar.
 
 Na pasta do projeto, execute com Python 3:
 
@@ -31,6 +40,12 @@ dist/
   pages.css             # Estilos das páginas internas
   app.js                # Tema, menu, detalhes de planos e filtros
   assets/living-room.png
+  assets/effects.*      # Bundle React gerado e avisos de licença
+src/
+  effects.jsx          # Integração dos efeitos, pausa e alternativa estática
+  warp-section.css     # Composição visual das ilhas React
+  components/          # Componentes JS-CSS do registro oficial React Bits
+scripts/build.mjs      # Bundle isolado com esbuild
 DESIGN-SYSTEM.md         # Direção visual e regras de interface
 .openai/hosting.json     # Identificação da publicação existente no Sites
 ```
@@ -44,6 +59,9 @@ Os arquivos em `dist` são o código-fonte editável e devem permanecer versiona
 - Detalhes de planos em diálogo nativo, com retorno do foco.
 - Filtros de relatos com indicação da seleção e contagem anunciada.
 - Navegação por teclado, foco visível, HTML semântico e redução de movimento.
+- WarpText em uma faixa verde antes dos planos, com os parâmetros solicitados. A GPU só é inicializada perto da área visível; o componente pausa a renderização fora da tela e quando a aba está oculta.
+- Botão para pausar/retomar. Movimento reduzido ou WebGL 2 indisponível mantém o título HTML legível; perda do contexto gráfico também restaura o texto.
+- GradualBlur na base da foto principal: 6rem, intensidade 2, cinco camadas, curva bezier e progressão exponencial. A legenda fica acima do desfoque e o efeito não intercepta cliques.
 
 ## Conteúdo demonstrativo
 
