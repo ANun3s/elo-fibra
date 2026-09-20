@@ -2,10 +2,10 @@
 
 Conceito original de provedor residencial. Público: pessoas que trabalham, estudam e se divertem em casa. Objetivo: comparar planos e conhecer a proposta de conexão. Marca, preços e condições são demonstrativos.
 
-1. **Direção:** precisão editorial, superfícies minerais e verde floresta. O elo circular aberto é a assinatura da marca. Fotografia arquitetônica comunica tranquilidade e vida conectada.
+1. **Direção:** precisão editorial, superfícies neutras e contraste em preto e branco, com ações em azul-marinho. O elo circular aberto é a assinatura da marca. Fotografia arquitetônica comunica tranquilidade e vida conectada.
 2. **Grid:** máximo de 1280 px, base de 12 colunas; margens de 64 px no desktop, 32 px no tablet e 22 px no mobile.
 3. **Tipografia:** system sans-serif; hero 88–104 px no desktop / 52 px no mobile, títulos 56 / 38 px, subtítulos 24 px, corpo 16–18 px, labels 14 px e metadados 12 px. Pesos 400, 500 e 600; tracking negativo apenas em títulos.
-4. **Cores:** claro: fundo #f6f7f4, superfície #ffffff, texto #202820, secundário #626b61, marca #27563c. Escuro: fundo #111713, superfície #1b241e, texto #f2f4ed, secundário #abb6aa, marca #afd5a8. Superfícies fotográficas mantêm tratamento independente.
+4. **Cores:** claro: fundo #fafafa, superfície #ffffff, texto #111111, secundário #626262, marca #000000. Escuro: fundo #0a0a0a, superfície #171717, texto #fafafa, secundário #b3b3b3, marca #ffffff. Fotografias preservam as cores originais. Botões e pastas usam azul-marinho #142c4d, com texto branco #ffffff; hover #1d3c65 e filtro selecionado #244a7a. As animações da abertura permanecem neutras; o WarpText não separa os canais de cor.
 5. **Cantos:** 8, 12, 16, 24, 32 px e pill. Cards 24 px, ações pill, modal 32 px.
 6. **Espaçamento:** escala 4, 8, 12, 16, 24, 32, 48, 64, 96 e 128 px.
 7. **Componentes:** navegação flutuante em vidro, botões primário/secundário/texto, seletor de tema, cards de planos, detalhes de plano em dialog nativo, perguntas frequentes em details e rodapé.

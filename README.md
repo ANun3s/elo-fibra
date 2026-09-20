@@ -1,6 +1,6 @@
 # elo — internet no ritmo da sua vida
 
-Site conceitual de um provedor de internet residencial, com identidade original, layout responsivo e temas claro e escuro.
+Site conceitual de um provedor de internet residencial, com identidade original, layout responsivo e temas claro e escuro em preto, branco e tons de cinza, com botões e pastas em azul-marinho e fotografias coloridas.
 
 ## Páginas
 
@@ -45,7 +45,7 @@ dist/
 src/
   effects.jsx          # Integração dos efeitos e alternativa estática
   plan-folders.jsx     # Pastas dos três planos e pop-ups de vantagens
-  plan-folders.css     # Pastas verdes responsivas e janelas de detalhes
+  plan-folders.css     # Pastas azul-marinho responsivas e janelas de detalhes
   warp-section.css     # Composição visual das ilhas React
   specular-buttons.jsx # Integração do brilho com os controles HTML existentes
   specular-buttons.css # Ajustes visuais dos botões
@@ -65,7 +65,7 @@ Os arquivos em `dist` são o código-fonte editável e devem permanecer versiona
 - Uma pasta interativa em cada plano, com arquivos clicáveis de velocidade, Wi-Fi e usos. Os detalhes abrem em diálogo nativo, com Escape, foco contido e retorno ao arquivo. Uma única pasta fica aberta por vez; toque e teclado são suportados.
 - Filtros de relatos com indicação da seleção e contagem anunciada.
 - Navegação por teclado, foco visível, HTML semântico e redução de movimento.
-- Uma única instância de WarpText no título principal, preservando o texto, as quebras responsivas e as duas cores da identidade. Os parâmetros de distorção seguem a configuração solicitada; a tipografia e a altura acompanham o título existente. A GPU só é inicializada perto da área visível; o componente pausa a renderização fora da tela e quando a aba está oculta.
+- Uma única instância de WarpText no título principal, preservando o texto, as quebras responsivas e a paleta monocromática. Os parâmetros de distorção seguem a configuração solicitada, com refração cromática zerada para manter o preto e branco; a tipografia e a altura acompanham o título existente. A GPU só é inicializada perto da área visível; o componente pausa a renderização fora da tela e quando a aba está oculta.
 - LetterGlitch no fundo da abertura, com atualização de 50ms, suavização e vinheta central. Opacidade de 24% no tema claro e 20% no escuro, ainda menor no celular; uma máscara suaviza as bordas. O fundo é decorativo e não intercepta cliques.
 - Animações automáticas sem botão na interface. Movimento reduzido ou WebGL 2 indisponível mantém o título HTML legível; perda do contexto gráfico também restaura o texto.
 - O LetterGlitch é desmontado fora da área visível e quando a aba está oculta; a preferência de movimento reduzido desativa as duas animações.
