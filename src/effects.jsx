@@ -1,7 +1,9 @@
 import { Component, useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
+import { createPortal } from 'react-dom';
 import WarpText from './components/WarpText';
 import GradualBlur from './components/GradualBlur';
+import LetterGlitch from './components/LetterGlitch';
 import './warp-section.css';
 
 class EffectBoundary extends Component {
@@ -14,10 +16,20 @@ class EffectBoundary extends Component {
 function WarpMoment({ stage }) {
   const [typography, setTypography] = useState(null);
   const [reduced, setReduced] = useState(() => matchMedia('(prefers-reduced-motion: reduce)').matches);
-  const [paused, setPaused] = useState(false);
   const [failed, setFailed] = useState(false);
   const [ready, setReady] = useState(false);
-  const active = !reduced && !paused && !failed;
+  const [backgroundVisible, setBackgroundVisible] = useState(true);
+  const [pageVisible, setPageVisible] = useState(() => !document.hidden);
+  const active = !reduced && !failed;
+  const backgroundHost = document.getElementById('letter-glitch-root');
+
+  useEffect(() => {
+    const onVisibility = () => setPageVisible(!document.hidden);
+    document.addEventListener('visibilitychange', onVisibility);
+    const observer = new IntersectionObserver(([entry]) => setBackgroundVisible(entry.isIntersecting));
+    observer.observe(stage.closest('.hero-intro'));
+    return () => { observer.disconnect(); document.removeEventListener('visibilitychange', onVisibility); };
+  }, [stage]);
 
   useEffect(() => {
     const heading = stage.querySelector('h1');
@@ -26,6 +38,7 @@ function WarpMoment({ stage }) {
       const brandStyle = getComputedStyle(heading.querySelector('span'));
       const wrapped = heading.querySelector('span').getClientRects().length > 1;
       const next = {
+        theme: document.documentElement.dataset.theme,
         text: wrapped ? 'Sua vida flui.\nSua internet\ntambém.' : 'Sua vida flui.\nSua internet também.',
         fontSize: titleStyle.fontSize,
         fontWeight: titleStyle.fontWeight,
@@ -58,6 +71,20 @@ function WarpMoment({ stage }) {
   }, [active, ready, stage]);
 
   return <>
+    {!reduced && backgroundVisible && pageVisible && typography && backgroundHost && createPortal(
+      <EffectBoundary>
+        <LetterGlitch
+          key={typography.theme}
+          glitchSpeed={50}
+          centerVignette={true}
+          outerVignette={false}
+          smooth={true}
+          lightMode={typography.theme !== 'dark'}
+          backgroundColor="transparent"
+          glitchColors={typography.theme === 'dark' ? ['#2b4539', '#61dca3', '#afd5a8'] : ['#27563c', '#54765a', '#899781']}
+        />
+      </EffectBoundary>, backgroundHost
+    )}
     {active && typography && <EffectBoundary onFailure={setFailed}>
       <div aria-hidden="true">
         <WarpText
@@ -81,16 +108,6 @@ function WarpMoment({ stage }) {
         />
       </div>
     </EffectBoundary>}
-    {!reduced && !failed && <button
-      className="warp-pause"
-      type="button"
-      aria-pressed={paused}
-      aria-label={paused ? 'Retomar efeito do título' : 'Pausar efeito do título'}
-      title={paused ? 'Retomar efeito do título' : 'Pausar efeito do título'}
-      onClick={() => setPaused(value => !value)}
-    >
-      <span aria-hidden="true">{paused ? '▷' : 'Ⅱ'}</span>
-    </button>}
   </>;
 }
 
