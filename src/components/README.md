@@ -16,6 +16,6 @@ O código GradualBlur e os dois CSS correspondem integralmente ao registro. O Wa
 - `lineColors` permite manter a segunda linha na cor da marca, inclusive ao trocar o tema.
 - A área útil do texto usa 96% da largura e 94% da altura para acompanhar a tipografia do título principal, com espaço para a distorção.
 
-A sequência `split('\n')` foi preservada diretamente do JSON, pois o CLI a alterou indevidamente durante a instalação. A integração externa em `src/effects.jsx` gerencia pausa, preferência de movimento reduzido e carregamento próximo da área visível.
+A sequência `split('\n')` foi preservada diretamente do JSON, pois o CLI a alterou indevidamente durante a instalação. A integração externa em `src/effects.jsx` gerencia preferência de movimento reduzido e carregamento próximo da área visível.
 
-O LetterGlitch usa o código oficial, com limite de densidade de pixels em 2 e limpeza do temporizador de resize ao desmontar. Não declara dependências adicionais. A integração controla visibilidade, temas, movimento reduzido e pausa compartilhada com o WarpText.
+O LetterGlitch usa o código oficial, com limite de densidade de pixels em 2 e limpeza do temporizador de resize ao desmontar. Não declara dependências adicionais. A integração controla visibilidade, temas e movimento reduzido.
