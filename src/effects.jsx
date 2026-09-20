@@ -12,11 +12,37 @@ class EffectBoundary extends Component {
 }
 
 function WarpMoment({ stage }) {
+  const [typography, setTypography] = useState(null);
   const [reduced, setReduced] = useState(() => matchMedia('(prefers-reduced-motion: reduce)').matches);
   const [paused, setPaused] = useState(false);
   const [failed, setFailed] = useState(false);
   const [ready, setReady] = useState(false);
   const active = !reduced && !paused && !failed;
+
+  useEffect(() => {
+    const heading = stage.querySelector('h1');
+    const update = () => {
+      const titleStyle = getComputedStyle(heading);
+      const brandStyle = getComputedStyle(heading.querySelector('span'));
+      const wrapped = heading.querySelector('span').getClientRects().length > 1;
+      const next = {
+        text: wrapped ? 'Sua vida flui.\nSua internet\ntambém.' : 'Sua vida flui.\nSua internet também.',
+        fontSize: titleStyle.fontSize,
+        fontWeight: titleStyle.fontWeight,
+        lineHeight: titleStyle.lineHeight,
+        letterSpacing: titleStyle.letterSpacing,
+        color: titleStyle.color,
+        lineColors: wrapped ? [titleStyle.color, brandStyle.color, brandStyle.color] : [titleStyle.color, brandStyle.color]
+      };
+      setTypography(previous => JSON.stringify(previous) === JSON.stringify(next) ? previous : next);
+    };
+    update();
+    const resize = new ResizeObserver(update);
+    resize.observe(stage);
+    const theme = new MutationObserver(update);
+    theme.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+    return () => { resize.disconnect(); theme.disconnect(); };
+  }, [stage]);
 
   useEffect(() => {
     const media = matchMedia('(prefers-reduced-motion: reduce)');
@@ -32,11 +58,12 @@ function WarpMoment({ stage }) {
   }, [active, ready, stage]);
 
   return <>
-    {active && <EffectBoundary onFailure={setFailed}>
+    {active && typography && <EffectBoundary onFailure={setFailed}>
       <div aria-hidden="true">
         <WarpText
-          text="Bend the moment"
-          color="#f8f5ff"
+          text={typography.text}
+          color={typography.color}
+          lineColors={typography.lineColors}
           warpStrength={0.08}
           warpScale={1.7}
           speed={0.55}
@@ -44,9 +71,11 @@ function WarpMoment({ stage }) {
           pointerStrength={0.38}
           refraction={0.018}
           ripple
-          fontSize="clamp(3rem, 10vw, 9rem)"
-          fontWeight={800}
-          style={{ height: '320px' }}
+          fontSize={typography.fontSize}
+          fontWeight={typography.fontWeight}
+          lineHeight={typography.lineHeight}
+          letterSpacing={typography.letterSpacing}
+          style={{ height: '100%' }}
           onReady={setReady}
           onError={setFailed}
         />
@@ -56,10 +85,11 @@ function WarpMoment({ stage }) {
       className="warp-pause"
       type="button"
       aria-pressed={paused}
+      aria-label={paused ? 'Retomar efeito do título' : 'Pausar efeito do título'}
+      title={paused ? 'Retomar efeito do título' : 'Pausar efeito do título'}
       onClick={() => setPaused(value => !value)}
     >
       <span aria-hidden="true">{paused ? '▷' : 'Ⅱ'}</span>
-      {paused ? 'Retomar efeito' : 'Pausar efeito'}
     </button>}
   </>;
 }
