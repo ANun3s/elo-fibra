@@ -4,7 +4,7 @@ function setTheme(theme) {
   root.dataset.theme = theme;
   themeButton.setAttribute('aria-label', theme === 'dark' ? 'Ativar tema claro' : 'Ativar tema escuro');
   themeButton.setAttribute('aria-pressed', String(theme === 'dark'));
-  document.querySelector('meta[name="theme-color"]').content = theme === 'dark' ? '#111713' : '#f6f7f4';
+  document.querySelector('meta[name="theme-color"]').content = theme === 'dark' ? '#0a0a0a' : '#fafafa';
 }
 let initialTheme = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
 try { initialTheme = localStorage.getItem('elo-theme') || initialTheme; } catch {}
