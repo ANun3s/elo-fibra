@@ -10,7 +10,7 @@ Site conceitual de um provedor de internet residencial, com identidade original,
 
 ## Executar localmente
 
-As páginas usam HTML, CSS e JavaScript, com duas ilhas React na página inicial: WarpText e GradualBlur, do React Bits. Os arquivos publicados em `dist` já incluem o bundle dos efeitos.
+As páginas usam HTML, CSS e JavaScript, com efeitos React na página inicial: WarpText, GradualBlur e LetterGlitch, do React Bits. Os arquivos publicados em `dist` já incluem o bundle dos efeitos.
 
 Para editar os componentes React, instale Node.js e pnpm, depois execute:
 
@@ -42,7 +42,7 @@ dist/
   assets/living-room.png
   assets/effects.*      # Bundle React gerado e avisos de licença
 src/
-  effects.jsx          # Integração dos efeitos, pausa e alternativa estática
+  effects.jsx          # Integração dos efeitos e alternativa estática
   warp-section.css     # Composição visual das ilhas React
   components/          # Componentes JS-CSS do registro oficial React Bits
 scripts/build.mjs      # Bundle isolado com esbuild
@@ -59,8 +59,11 @@ Os arquivos em `dist` são o código-fonte editável e devem permanecer versiona
 - Detalhes de planos em diálogo nativo, com retorno do foco.
 - Filtros de relatos com indicação da seleção e contagem anunciada.
 - Navegação por teclado, foco visível, HTML semântico e redução de movimento.
-- WarpText em uma faixa verde antes dos planos, com os parâmetros solicitados. A GPU só é inicializada perto da área visível; o componente pausa a renderização fora da tela e quando a aba está oculta.
-- Botão para pausar/retomar. Movimento reduzido ou WebGL 2 indisponível mantém o título HTML legível; perda do contexto gráfico também restaura o texto.
+- Uma única instância de WarpText no título principal, preservando o texto, as quebras responsivas e as duas cores da identidade. Os parâmetros de distorção seguem a configuração solicitada; a tipografia e a altura acompanham o título existente. A GPU só é inicializada perto da área visível; o componente pausa a renderização fora da tela e quando a aba está oculta.
+- LetterGlitch no fundo da abertura, com atualização de 50ms, suavização e vinheta central. Opacidade de 24% no tema claro e 20% no escuro, ainda menor no celular; uma máscara suaviza as bordas. O fundo é decorativo e não intercepta cliques.
+- Animações automáticas sem botão na interface. Movimento reduzido ou WebGL 2 indisponível mantém o título HTML legível; perda do contexto gráfico também restaura o texto.
+- O LetterGlitch é desmontado fora da área visível e quando a aba está oculta; a preferência de movimento reduzido desativa as duas animações.
+- Espaçamento das seções ampliado para 136px no desktop e 88px no celular.
 - GradualBlur na base da foto principal: 6rem, intensidade 2, cinco camadas, curva bezier e progressão exponencial. A legenda fica acima do desfoque e o efeito não intercepta cliques.
 
 ## Conteúdo demonstrativo
