@@ -5,9 +5,9 @@ import Folder from './components/Folder';
 import './plan-folders.css';
 
 const plans = {
-  essencial: { name: 'elo essencial', color: '#628568', download: '400 Mbps', upload: '200 Mbps', price: 'R$ 89,90 / mês', equipment: 'Roteador Wi-Fi 6', use: 'Para estudar, navegar e curtir seus conteúdos.', advantages: ['Aulas e chamadas de vídeo no dia a dia.', 'Filmes, séries e navegação em casa.', 'Envio de fotos e documentos para a nuvem.'] },
-  completo: { name: 'elo completo', color: '#27563c', download: '700 Mbps', upload: '350 Mbps', price: 'R$ 109,90 / mês', equipment: 'Roteador Wi-Fi 6', use: 'Mais espaço para a casa toda se conectar.', advantages: ['Mais capacidade para atividades simultâneas.', 'Trabalho, estudo e entretenimento na mesma casa.', 'Mais velocidade para baixar e enviar arquivos.'] },
-  maxima: { name: 'elo máxima', color: '#41694d', download: '1.000 Mbps', upload: '500 Mbps', price: 'R$ 149,90 / mês', equipment: 'Wi-Fi 6 + ponto mesh', use: 'Para uma rotina intensa e uma casa mais conectada.', advantages: ['A maior velocidade entre os três planos.', 'Mais capacidade para downloads e uploads grandes.', 'Um ponto mesh para ampliar a distribuição do Wi-Fi.'] }
+  essencial: { name: 'elo essencial', color: '#142c4d', download: '400 Mbps', upload: '200 Mbps', price: 'R$ 89,90 / mês', equipment: 'Roteador Wi-Fi 6', use: 'Para estudar, navegar e curtir seus conteúdos.', advantages: ['Aulas e chamadas de vídeo no dia a dia.', 'Filmes, séries e navegação em casa.', 'Envio de fotos e documentos para a nuvem.'] },
+  completo: { name: 'elo completo', color: '#142c4d', download: '700 Mbps', upload: '350 Mbps', price: 'R$ 109,90 / mês', equipment: 'Roteador Wi-Fi 6', use: 'Mais espaço para a casa toda se conectar.', advantages: ['Mais capacidade para atividades simultâneas.', 'Trabalho, estudo e entretenimento na mesma casa.', 'Mais velocidade para baixar e enviar arquivos.'] },
+  maxima: { name: 'elo máxima', color: '#142c4d', download: '1.000 Mbps', upload: '500 Mbps', price: 'R$ 149,90 / mês', equipment: 'Wi-Fi 6 + ponto mesh', use: 'Para uma rotina intensa e uma casa mais conectada.', advantages: ['A maior velocidade entre os três planos.', 'Mais capacidade para downloads e uploads grandes.', 'Um ponto mesh para ampliar a distribuição do Wi-Fi.'] }
 };
 const labels = ['Velocidade', 'Wi-Fi', 'Dia a dia'];
 const paths = ['m13 3-8 11h6l-1 7 9-12h-7z', 'M3 9a14 14 0 0 1 18 0M6 13a9 9 0 0 1 12 0m-9 4a4 4 0 0 1 6 0m-3 3h.01', 'm3 11 9-8 9 8M5 10v11h14V10M9 21v-7h6v7'];

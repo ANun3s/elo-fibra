@@ -82,7 +82,7 @@ function WarpMoment({ stage }) {
           smooth={true}
           lightMode={typography.theme !== 'dark'}
           backgroundColor="transparent"
-          glitchColors={typography.theme === 'dark' ? ['#2b4539', '#61dca3', '#afd5a8'] : ['#27563c', '#54765a', '#899781']}
+          glitchColors={typography.theme === 'dark' ? ['#454545', '#b8b8b8', '#ffffff'] : ['#000000', '#666666', '#999999']}
         />
       </EffectBoundary>, backgroundHost
     )}
@@ -97,7 +97,7 @@ function WarpMoment({ stage }) {
           speed={0.55}
           pointerInfluence={0.42}
           pointerStrength={0.38}
-          refraction={0.018}
+          refraction={0}
           ripple
           fontSize={typography.fontSize}
           fontWeight={typography.fontWeight}
