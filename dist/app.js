@@ -40,10 +40,78 @@ document.querySelectorAll('[data-plan]').forEach(button => button.addEventListen
 dialog?.querySelectorAll('.dialog-close,.dialog-done').forEach(button => button.addEventListener('click', () => dialog.close()));
 dialog?.addEventListener('click', event => { if(event.target === dialog) { const rect = dialog.getBoundingClientRect(); if(event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) dialog.close(); } });
 dialog?.addEventListener('close', () => { document.body.style.overflow = ''; lastPlanTrigger?.focus(); });
-if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
-  const observer = new IntersectionObserver(entries => { for(const entry of entries) { if(entry.isIntersecting) {entry.target.classList.add('is-visible');observer.unobserve(entry.target);} } }, {threshold:.12});
-  document.querySelectorAll('.section-intro,.connection-panel').forEach(el => { el.classList.add('reveal-ready'); observer.observe(el); });
+// Content remains visible until progressive enhancement is available.
+const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+const precisePointer = matchMedia('(hover: hover) and (pointer: fine)');
+const revealItems = document.querySelectorAll([
+  '.hero-image', '.feature-strip', '.section-intro', '.benefits > article',
+  '.plans-grid > .plan', '.connection-panel', '.faq > div',
+  '.service-copy', '.service-visual', '.wifi-grid > article', '.tip-line',
+  '.service-steps > li', '.support-note', '.comparison-scroll',
+  '.featured-story', '.review-toolbar', '.review-card',
+  '.listening-list > article', '.page-next'
+].join(','));
+document.querySelectorAll('.benefits,.plans-grid,.wifi-grid,.service-steps,.review-grid,.listening-list').forEach(group => {
+  Array.from(group.children).forEach((item, index) => {
+    item.style.setProperty('--reveal-delay', `${Math.min(index % 3, 2) * 80}ms`);
+  });
+});
+let revealObserver;
+function showItem(item) {
+  item.classList.add('is-visible');
+  revealObserver?.unobserve(item);
 }
+function setupReveals() {
+  revealObserver?.disconnect();
+  if (reducedMotion.matches || !('IntersectionObserver' in window)) {
+    revealItems.forEach(item => item.classList.remove('reveal-ready'));
+    return;
+  }
+  revealObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => { if (entry.isIntersecting) showItem(entry.target); });
+  }, { threshold: 0, rootMargin: '0px 0px -36px 0px' });
+  revealItems.forEach(item => {
+    // Keep restored scroll positions and the initial viewport immediately readable.
+    if (item.classList.contains('is-visible') || (!item.hidden && item.getBoundingClientRect().top < innerHeight)) return;
+    item.classList.add('reveal-ready');
+    revealObserver.observe(item);
+  });
+}
+setupReveals();
+reducedMotion.addEventListener('change', setupReveals);
+document.addEventListener('focusin', event => {
+  const item = event.target.closest('.reveal-ready');
+  if (item) { item.classList.add('reveal-focused'); showItem(item); }
+});
+
+// A soft highlight follows the pointer inside each button; no global mouse tracking.
+document.querySelectorAll('.button,.icon-button,.filter-button').forEach(button => {
+  let frame = 0;
+  let pointerX = 0;
+  let pointerY = 0;
+  function clearPointer() {
+    cancelAnimationFrame(frame);
+    frame = 0;
+    button.classList.remove('is-pointer-over');
+  }
+  button.addEventListener('pointermove', event => {
+    if (!precisePointer.matches || reducedMotion.matches || event.pointerType === 'touch') return;
+    pointerX = event.clientX;
+    pointerY = event.clientY;
+    if (frame) return;
+    frame = requestAnimationFrame(() => {
+      const rect = button.getBoundingClientRect();
+      button.style.setProperty('--pointer-x', `${pointerX - rect.left}px`);
+      button.style.setProperty('--pointer-y', `${pointerY - rect.top}px`);
+      button.classList.add('is-pointer-over');
+      frame = 0;
+    });
+  }, { passive: true });
+  button.addEventListener('pointerleave', clearPointer);
+  button.addEventListener('pointercancel', clearPointer);
+  reducedMotion.addEventListener('change', clearPointer);
+  precisePointer.addEventListener('change', clearPointer);
+});
 
 const reviewFilters = document.querySelectorAll('[data-filter]');
 reviewFilters.forEach(button => button.addEventListener('click', () => {
