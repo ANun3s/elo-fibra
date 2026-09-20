@@ -29,6 +29,8 @@ O SpecularButton usa o shader oficial e a configuração de brilho solicitada, c
 - A integração externa monta apenas os controles visíveis e respeita movimento reduzido, toque e visibilidade da aba.
 
 
-O Folder vem de https://reactbits.dev/r/Folder-JS-CSS.json e não declara dependências. A estrutura visual e a animação originais foram adaptadas para o espaço dos cartões, com paleta verde, abertura controlada, botão nativo de abertura, arquivos em botões separados e rótulos em português. Apenas uma pasta fica aberta por vez. Os pop-ups usam dialog nativo, Escape, foco contido e retorno do foco ao arquivo. Movimento reduzido elimina as transições sem remover a funcionalidade.
+O Folder vem de https://reactbits.dev/r/Folder-JS-CSS.json e não declara dependências. A estrutura visual e a animação originais foram adaptadas para o espaço dos cartões, com paleta azul-marinho, abertura controlada, botão nativo de abertura, arquivos em botões separados e rótulos em português. Apenas uma pasta fica aberta por vez. Os pop-ups usam dialog nativo, Escape, foco contido e retorno do foco ao arquivo. Movimento reduzido elimina as transições sem remover a funcionalidade.
 
 O SpecularButton acompanha também os controles inseridos dinamicamente. As medidas de layout mantêm a borda alinhada em elementos transformados.
+
+A base da identidade usa preto, branco e cinza. Pastas e botões usam azul-marinho com texto branco. O WarpText mantém a distorção, com refraction=0 na integração para evitar franjas coloridas. As fotografias preservam suas cores originais.

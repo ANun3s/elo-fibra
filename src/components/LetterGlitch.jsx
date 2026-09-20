@@ -3,7 +3,7 @@ import { useRef, useEffect } from 'react';
 const FALLBACK_RGB = { r: 255, g: 255, b: 255 };
 
 const LetterGlitch = ({
-  glitchColors = ['#2b4539', '#61dca3', '#61b3dc'],
+  glitchColors = ['#454545', '#b8b8b8', '#8f8f8f'],
   className = '',
   glitchSpeed = 50,
   centerVignette = false,

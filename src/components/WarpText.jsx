@@ -212,7 +212,7 @@ const syncUniforms = (program, props) => {
 
 const WarpText = ({
   text = 'Bend the moment',
-  color = '#f8f5ff',
+  color = '#ffffff',
   lineColors,
   warpStrength = 0.08,
   warpScale = 1.7,

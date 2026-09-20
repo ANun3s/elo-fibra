@@ -19,7 +19,7 @@ const darkenColor = (hex, percent) => {
   return '#' + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1).toUpperCase();
 };
 
-const Folder = ({ color = '#5227FF', size = 1, items = [], className = '', open: controlledOpen, onOpenChange, onItemClick, label = 'plano', itemLabels = [] }) => {
+const Folder = ({ color = '#142c4d', size = 1, items = [], className = '', open: controlledOpen, onOpenChange, onItemClick, label = 'plano', itemLabels = [] }) => {
   const maxItems = 3;
   const papers = items.slice(0, maxItems);
   while (papers.length < maxItems) {
