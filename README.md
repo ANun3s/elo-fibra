@@ -10,7 +10,7 @@ Site conceitual de um provedor de internet residencial, com identidade original,
 
 ## Executar localmente
 
-As páginas usam HTML, CSS e JavaScript, com efeitos React na página inicial: WarpText, GradualBlur, LetterGlitch, Folder e SpecularButton, do React Bits. Os arquivos publicados em `dist` já incluem o bundle dos efeitos.
+As páginas usam HTML, CSS e JavaScript, com efeitos React na página inicial: WarpText, GradualBlur, LetterGlitch, Folder, FoldText, BubbleMenu e SpecularButton, do React Bits. Os arquivos publicados em `dist` já incluem o bundle dos efeitos.
 
 Para editar os componentes React, instale Node.js e pnpm, depois execute:
 
@@ -62,7 +62,7 @@ Os arquivos em `dist` são o código-fonte editável e devem permanecer versiona
 - Tema persistido no navegador e preferência inicial do sistema.
 - SpecularButton nos botões, ações de plano, filtros, menu, tema, navegação de serviços e perguntas frequentes. O shader usa a configuração solicitada; as cores, rótulos e ações originais permanecem. Apenas os controles visíveis criam canvas, e a renderização para quando o brilho se estabiliza. Em toque, movimento reduzido ou sem WebGL 2, os controles mantêm o comportamento nativo.
 - Navegação mobile com estado acessível.
-- Uma pasta interativa em cada plano, com arquivos clicáveis de velocidade, Wi-Fi e usos. Os detalhes abrem em diálogo nativo, com Escape, foco contido e retorno ao arquivo. Uma única pasta fica aberta por vez; toque e teclado são suportados.
+- Uma pasta interativa em cada plano, com cinco miniaturas para explorar velocidade, Wi-Fi, equipamentos, rotina e vantagens. Ao selecionar uma miniatura, o diálogo amplia o tópico escolhido e permite percorrer os demais. Uma única pasta fica aberta por vez; toque, teclado, foco de retorno e movimento reduzido são suportados.
 - Filtros de relatos com indicação da seleção e contagem anunciada.
 - Navegação por teclado, foco visível, HTML semântico e redução de movimento.
 - Uma única instância de WarpText no título principal, preservando o texto, as quebras responsivas e a paleta monocromática. Os parâmetros de distorção seguem a configuração solicitada, com refração cromática zerada para manter o preto e branco; a tipografia e a altura acompanham o título existente. A GPU só é inicializada perto da área visível; o componente pausa a renderização fora da tela e quando a aba está oculta.
@@ -75,3 +75,8 @@ Os arquivos em `dist` são o código-fonte editável e devem permanecer versiona
 ## Conteúdo demonstrativo
 
 A marca, os planos e os valores são conceituais. Os relatos são explicitamente fictícios, não avaliações reais. Não há contratação, cobrança ou consulta de cobertura. A imagem da sala foi gerada por IA para este projeto.
+
+- As quatro respostas de dúvidas usam FoldText ao abrir, com desdobramento pelo topo. O texto mantém palavras inteiras, tipografia de leitura e duração total curta; abrir novamente repete a animação. Movimento reduzido mostra a resposta imediatamente.
+- Os três links finais da página inicial usam BubbleMenu em modo inline: aparecem em sequência ao entrar na tela e preservam os destinos originais. O menu permanece dentro do rodapé, com navegação por teclado e sem sobrepor o conteúdo.
+
+- Fechar uma resposta reproduz a dobra em sentido inverso e recolhe o espaço. Um novo clique durante o fechamento retoma a abertura; teclado e movimento reduzido preservam o comportamento nativo.
