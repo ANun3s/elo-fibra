@@ -1,0 +1,41 @@
+/* Findings and validation: docs/design-audit.md */
+:root{--elo-nav-offset:118px}
+.hero{padding-top:calc(var(--elo-nav-offset) + 44px)}
+.page-intro{padding-top:calc(var(--elo-nav-offset) + 24px)}
+h1,h2,h3{text-wrap:balance}
+p{ text-wrap:pretty }
+a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:#789bc04d}
+main:focus{outline:none}
+:focus-visible{scroll-margin-block:24px}
+.price,.dialog-price,td{font-variant-numeric:tabular-nums}
+dialog{max-height:calc(100dvh - 40px);overflow-y:auto;overscroll-behavior:contain}
+.hero-intro>p{max-width:44rem;margin-inline:auto}
+.plans-disclosure{max-width:640px;margin:-12px 0 32px;font-size:14px;line-height:1.7;text-align:left}
+.plan h3{margin-top:28px}
+.plan .price{margin-top:26px;margin-bottom:20px}
+.plan .button{min-height:48px}
+.plan-folder-host{border-top:1px solid var(--line);margin:24px 0 0;padding-top:12px}
+.plan-folder-stage{height:204px}
+.folder-hint{font-size:13px}
+.folder-file-content{font-size:11px}
+.plan-footnote{margin-top:20px}
+.team-section{scroll-margin-top:0}
+.comparison-scroll{scrollbar-width:thin;scrollbar-color:#526c91 var(--soft)}
+.comparison-scroll:focus-visible{outline:3px solid var(--text);outline-offset:5px}
+.comparison-hint{font-size:14px;color:var(--muted);margin-bottom:16px}
+.reveal-ready{transition-duration:400ms}
+@media(max-width:1000px){:root{--elo-nav-offset:162px}}
+@media(max-width:640px){
+ :root{--elo-nav-offset:144px}
+ .hero{padding-top:calc(var(--elo-nav-offset) + 24px)}
+ .page-intro{padding-top:calc(var(--elo-nav-offset) + 20px)}
+ .breadcrumb{margin-bottom:32px}
+ .hero-actions{flex-direction:column;gap:12px}
+ .hero-actions .button{width:100%;max-width:320px}
+ .plans-disclosure{margin:0 0 26px}
+ .faq-list summary{gap:20px;line-height:1.5;padding:18px!important}
+ .faq-list summary>span[aria-hidden]{flex-shrink:0}
+ .team-index,.team-role,.team-skills li,.team-badge-hint{font-size:12px}
+ .footer-bottom{gap:12px}
+}
+@media(prefers-reduced-motion:reduce){.reveal-ready{opacity:1;translate:none}}

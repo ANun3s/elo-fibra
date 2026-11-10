@@ -1,0 +1,36 @@
+.plan-preview{background:var(--soft)}
+.plan-preview-layout{display:grid;grid-template-columns:1fr 1.25fr;gap:clamp(48px,7vw,100px);align-items:center}
+.plan-preview-label{color:var(--muted);font-size:14px;margin-bottom:20px}
+.plan-preview-copy h2{font-size:clamp(36px,4.5vw,56px);line-height:1.08;letter-spacing:-.055em}
+.plan-preview-copy>p:not(.plan-preview-label){max-width:370px;color:var(--muted);font-size:17px;line-height:1.75;margin-top:24px}
+.plan-preview-copy>p.plan-preview-feature{font-size:14px;line-height:1.7;color:var(--text);margin-top:24px}
+.plan-preview-copy .button{margin-top:30px;min-height:52px}
+.plan-preview-options{min-width:0}
+.plan-preview-option{display:grid;grid-template-columns:140px 1fr 32px;gap:20px;align-items:center;padding:30px 0;border-bottom:1px solid var(--line)}
+.plan-preview-option:first-child{border-top:1px solid var(--line)}
+.plan-preview-speed{font-size:clamp(44px,4.5vw,60px);font-weight:500;line-height:1;letter-spacing:-.065em;font-variant-numeric:tabular-nums}
+.plan-preview-speed>span{display:block;margin-top:7px;font-size:16px;font-weight:400;letter-spacing:-.02em;color:var(--muted)}
+.plan-preview-summary h3{font-size:21px;line-height:1.25;letter-spacing:-.035em;text-wrap:pretty}
+.plan-preview-summary p{font-size:14px;line-height:1.65;margin-top:8px;color:var(--muted);max-width:240px}
+.plan-preview-arrow{font-size:25px;color:var(--muted);transition:transform 180ms ease,color 180ms ease}
+.plan-preview-option:hover .plan-preview-arrow{transform:translate(3px,-3px);color:var(--text)}
+.plan-preview-option:focus-visible{outline:2px solid var(--text);outline-offset:6px;border-radius:4px}
+.plan-preview-prompt{font-size:13px;line-height:1.7;margin-top:20px;color:var(--muted)}
+.plan-preview-note{color:var(--muted);font-size:12px;line-height:1.7;margin-top:48px;max-width:680px}
+@media(max-width:1000px){
+ .plan-preview-layout{gap:40px;grid-template-columns:1fr 1.1fr}
+ .plan-preview-option{grid-template-columns:92px 1fr 22px;gap:14px}
+ .plan-preview-summary h3{font-size:19px}
+}
+@media(max-width:700px){
+ .plan-preview-layout{grid-template-columns:1fr;gap:38px}
+ .plan-preview-copy h2{font-size:42px}
+ .plan-preview-copy>p:not(.plan-preview-label){max-width:440px;font-size:16px}
+ .plan-preview-copy .button{width:100%}
+ .plan-preview-option{grid-template-columns:90px 1fr 24px;padding:24px 0}
+ .plan-preview-summary h3{font-size:19px}
+ .plan-preview-summary p{font-size:13px}
+ .plan-preview-speed{font-size:46px}
+ .plan-preview-note{margin-top:32px}
+}
+@media(prefers-reduced-motion:reduce){.plan-preview-arrow{transition:none}}

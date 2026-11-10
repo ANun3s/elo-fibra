@@ -1,0 +1,39 @@
+/* One motion language, separate from text, controls and existing React scenes. */
+.reading-progress{position:fixed;z-index:90;inset:0 0 auto;height:2px;background:#142c4d;transform:scaleX(0);transform-origin:left;pointer-events:none}
+[data-theme=dark] .reading-progress{background:#dce7f5}
+.scroll-motion-enabled [data-scroll-media]{overflow:hidden}
+.scroll-motion-enabled [data-scroll-media]>img{transform:translate3d(0,var(--media-shift,0px),0) scale(var(--media-scale,1.09));transform-origin:center}
+.scroll-motion-enabled .signature-footer-wordmark>span{transform:translate3d(0,var(--wordmark-shift,0px),0)}
+
+/* A real CSS solid, with independent faces; no canvas or extra WebGL context. */
+.mesh-scene{--mesh-yaw:0deg;--mesh-pitch:-7deg;--mesh-lift:0px;--signal-progress:.65;background:#142c4d;color:#fff;width:100%;min-height:300px;perspective:850px;isolation:isolate}
+.mesh-scene-heading{position:absolute;top:24px;left:28px;right:28px;font-size:11px;letter-spacing:.04em;color:#d7e2ef;z-index:2}
+.mesh-world{position:absolute;left:50%;top:50%;width:360px;height:220px;margin:-106px 0 0 -180px;transform-style:preserve-3d;transform:translateY(var(--mesh-lift)) rotateX(var(--mesh-pitch)) rotateY(var(--mesh-yaw))}
+.mesh-ground{position:absolute;width:320px;height:240px;left:20px;top:70px;transform:rotateX(80deg);border:1px solid #ffffff1c;border-radius:50%;background:radial-gradient(ellipse,#ffffff08,transparent 70%);transform-style:preserve-3d}
+.mesh-ground:before,.mesh-ground:after{content:'';position:absolute;inset:28px;border:1px solid #ffffff16;border-radius:50%}
+.mesh-ground:after{inset:58px}
+.mesh-bridge{position:absolute;left:80px;right:70px;top:179px;height:2px;background:#ffffff15;transform:translateZ(20px)}
+.mesh-bridge:after{content:'';position:absolute;inset:0;background:#b5cee9;transform:scaleX(var(--signal-progress));transform-origin:left;box-shadow:0 0 8px #b5cee944}
+.router-solid{position:absolute;left:57px;top:37px;width:92px;height:140px;transform-style:preserve-3d;transform:rotateY(-24deg)}
+.router-solid--satellite{left:220px;top:55px;transform:rotateY(-24deg) scale(.78)}
+.router-face{position:absolute;backface-visibility:hidden;border:1px solid #e3e7ec}
+.router-front,.router-back{inset:0;background:#f6f7f9;border-radius:9px}
+.router-front{transform:translateZ(23px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:27px;box-shadow:inset 0 0 18px #ffffff}
+.router-front img{width:54px;height:27px;object-fit:contain}
+.router-front i{display:block;width:13px;height:2px;border-radius:2px;background:#365b85;box-shadow:0 0 4px #365b8530}
+.router-back{transform:rotateY(180deg) translateZ(23px);background:#cdd4dd}
+.router-left,.router-right{width:46px;height:140px;left:23px;top:0;background:#d6dde5;border-radius:7px}
+.router-left{transform:rotateY(-90deg) translateZ(46px)}
+.router-right{transform:rotateY(90deg) translateZ(46px);background:linear-gradient(90deg,#c8d1dc,#e2e7ed)}
+.router-top,.router-bottom{width:92px;height:46px;left:0;top:47px;border-radius:7px;background:#fff}
+.router-top{transform:rotateX(90deg) translateZ(70px)}
+.router-top:after{content:'';position:absolute;inset:13px 18px;background:repeating-linear-gradient(90deg,#cbd3df 0 1px,transparent 1px 5px);opacity:.65}
+.router-bottom{transform:rotateX(-90deg) translateZ(70px);background:#b4c0ce}
+.router-shadow{position:absolute;width:108px;height:26px;left:47px;top:187px;border-radius:50%;background:#050d1b66;filter:blur(10px);transform:rotateX(40deg)}
+.router-shadow--satellite{left:213px;width:87px;height:22px;top:182px}
+.mesh-scene-labels{position:absolute;inset:auto 28px 22px;display:flex;justify-content:space-between;gap:24px;font-size:11px;color:#d7e2ef}
+.mesh-scene-labels span:last-child{text-align:right}
+.mesh-scene-labels strong{display:block;font-size:13px;font-weight:500;color:#fff;margin-bottom:4px}
+@media(max-width:1000px) and (min-width:801px){.mesh-world{scale:.86}.mesh-scene-heading{left:22px}.mesh-scene-labels{left:22px;right:22px}}
+@media(max-width:420px){.mesh-world{scale:.85}.mesh-scene{min-height:290px}.mesh-scene-heading{left:22px;top:22px}.mesh-scene-labels{inset:auto 22px 20px}}
+@media(prefers-reduced-motion:reduce){.reading-progress{display:none}.scroll-motion-enabled [data-scroll-media]>img,.scroll-motion-enabled .signature-footer-wordmark>span{transform:none}.mesh-world{transform:rotateX(-7deg)}}

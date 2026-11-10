@@ -2,20 +2,14 @@ const root = document.documentElement;
 const themeButton = document.getElementById('theme-toggle');
 function setTheme(theme) {
   root.dataset.theme = theme;
-  themeButton.setAttribute('aria-label', theme === 'dark' ? 'Ativar tema claro' : 'Ativar tema escuro');
-  themeButton.setAttribute('aria-pressed', String(theme === 'dark'));
+  document.getElementById('theme-toggle')?.setAttribute('aria-label', theme === 'dark' ? 'Ativar tema claro' : 'Ativar tema escuro');
+  document.getElementById('theme-toggle')?.setAttribute('aria-pressed', String(theme === 'dark'));
   document.querySelector('meta[name="theme-color"]').content = theme === 'dark' ? '#0a0a0a' : '#fafafa';
 }
 let initialTheme = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
 try { initialTheme = localStorage.getItem('elo-theme') || initialTheme; } catch {}
 setTheme(initialTheme);
-themeButton.addEventListener('click', () => { const theme = root.dataset.theme === 'dark' ? 'light' : 'dark'; setTheme(theme); try { localStorage.setItem('elo-theme', theme); } catch {} });
-const menu = document.getElementById('menu-toggle');
-const links = document.getElementById('nav-links');
-function closeMenu() { links.classList.remove('open'); menu.setAttribute('aria-expanded','false'); menu.setAttribute('aria-label','Abrir navegação'); }
-menu.addEventListener('click', () => { const open = links.classList.toggle('open'); menu.setAttribute('aria-expanded', String(open)); menu.setAttribute('aria-label', open ? 'Fechar navegação' : 'Abrir navegação'); });
-links.addEventListener('click', e => { if(e.target.closest('a')) closeMenu(); });
-document.addEventListener('keydown', e => { if(e.key === 'Escape' && links.classList.contains('open')) { closeMenu(); menu.focus(); } });
+document.addEventListener('click', event => { if (!event.target.closest('#theme-toggle')) return; const theme = root.dataset.theme === 'dark' ? 'light' : 'dark'; setTheme(theme); try { localStorage.setItem('elo-theme', theme); } catch {} });
 const plans = {
   essencial: {name:'elo essencial',description:'Para o dia a dia fluir.',price:'R$ 89,90 / mês',download:'400 Mbps',upload:'200 Mbps',equipment:'Roteador Wi-Fi 6'},
   completo: {name:'elo completo',description:'Para a casa toda, ao mesmo tempo.',price:'R$ 109,90 / mês',download:'700 Mbps',upload:'350 Mbps',equipment:'Roteador Wi-Fi 6'},
@@ -24,6 +18,8 @@ const plans = {
 const dialog = document.getElementById('plan-dialog');
 let lastPlanTrigger;
 document.querySelectorAll('[data-plan]').forEach(button => button.addEventListener('click', () => {
+  const request = new CustomEvent('elo:open-plan', { cancelable: true, detail: { key: button.dataset.plan, trigger: button } });
+  if (!document.dispatchEvent(request)) return;
   const plan = plans[button.dataset.plan];
   lastPlanTrigger = button;
   document.getElementById('dialog-title').textContent = plan.name;
@@ -83,15 +79,30 @@ document.addEventListener('focusin', event => {
   if (item) { item.classList.add('reveal-focused'); showItem(item); }
 });
 
-const reviewFilters = document.querySelectorAll('[data-filter]');
-reviewFilters.forEach(button => button.addEventListener('click', () => {
-  const selected = button.dataset.filter;
-  let count = 0;
-  document.querySelectorAll('[data-category]').forEach(card => {
-    const visible = selected === 'todos' || card.dataset.category === selected;
-    card.hidden = !visible;
-    if (visible) count++;
-  });
-  reviewFilters.forEach(filter => filter.setAttribute('aria-pressed', String(filter === button)));
-  document.getElementById('review-count').textContent = `${count} relatos ilustrativos`;
-}));
+const reviewFilters = [...document.querySelectorAll('[data-filter]')];
+if (reviewFilters.length) {
+  function applyReviewFilter(selected, updateUrl = false) {
+    if (!reviewFilters.some(button => button.dataset.filter === selected)) selected = 'todos';
+    let count = 0;
+    document.querySelectorAll('[data-category]').forEach(card => {
+      const visible = selected === 'todos' || card.dataset.category === selected;
+      card.hidden = !visible;
+      if (visible) { count++; showItem(card); }
+    });
+    reviewFilters.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.filter === selected)));
+    document.getElementById('review-count').textContent = `${count} relatos ilustrativos`;
+    if (updateUrl) {
+      const url = new URL(location.href);
+      if (selected === 'todos') url.searchParams.delete('assunto'); else url.searchParams.set('assunto', selected);
+      history.pushState(null, '', url);
+    }
+  }
+  const restoreFilter = () => {
+    const selected = new URLSearchParams(location.search).get('assunto') || 'todos';
+    applyReviewFilter(selected);
+    if (selected !== 'todos') document.querySelector('.stories-readable').open = true;
+  };
+  reviewFilters.forEach(button => button.addEventListener('click', () => applyReviewFilter(button.dataset.filter, true)));
+  window.addEventListener('popstate', restoreFilter);
+  restoreFilter();
+}
