@@ -12,7 +12,7 @@ export function normalizeBase(value = '/') {
 export function rewritePaths(text, extension, base) {
   const prefix = url => url.startsWith('/') && !url.startsWith('//') ? base + url.slice(1) : url;
   if (extension === '.html') {
-    return text.replace(/\b(href|src|poster|action)=(['"])(.*?)\2/g, (_, attr, quote, url) => `${attr}=${quote}${prefix(url)}${quote}`)
+    return text.replace(/\b(href|src|poster|action|data-front|data-back)=(['"])(.*?)\2/g, (_, attr, quote, url) => `${attr}=${quote}${prefix(url)}${quote}`)
       .replace(/\bsrcset=(['"])(.*?)\1/g, (_, quote, list) => `srcset=${quote}${list.replace(/(^|,\s*)(\/[^\s,]+)/g, (match, separator, url) => separator + prefix(url))}${quote}`);
   }
   if (extension === '.css') {
@@ -20,7 +20,8 @@ export function rewritePaths(text, extension, base) {
   }
   // Runtime asset URLs and known site routes; leave slash literals and external URLs alone.
   if (extension === '.js') {
-    return text.replace(/(['"`])(\/(?:assets\/|servicos\/|clientes\/|planos\/)[^'"`\s]*)\1/g, (_, quote, url) => `${quote}${prefix(url)}${quote}`);
+    return text.replace(/(\bhref\s*:\s*)(['"])\/\2/g, (_, key, quote) => `${key}${quote}${base}${quote}`)
+      .replace(/(['"`])(\/(?:assets\/|servicos\/|clientes\/|planos\/)[^'"`\s]*)\1/g, (_, quote, url) => `${quote}${prefix(url)}${quote}`);
   }
   return text;
 }
