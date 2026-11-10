@@ -1,0 +1,7 @@
+.elo-decrypted{max-width:100%;vertical-align:top}
+.elo-decrypted .decrypt-word{display:inline-block;white-space:nowrap}
+.elo-decrypted .decrypt-cell{display:inline-block;position:relative}
+.elo-decrypted .decrypt-measure{visibility:hidden}
+.elo-decrypted .decrypt-glyph{position:absolute;inset:0;white-space:pre;text-align:center;overflow:hidden}
+.elo-decrypted .decrypt-encrypted{opacity:.68}
+@media(prefers-reduced-motion:reduce){.elo-decrypted{animation:none}}

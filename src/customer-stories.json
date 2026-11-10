@@ -1,0 +1,50 @@
+[
+  {
+    "image": "/assets/story-0.svg",
+    "title": "Marina",
+    "description": "“O que eu mais valorizo é conseguir participar das reuniões enquanto a rotina da casa continua.”",
+    "heading": "Chamadas que acompanham o dia.",
+    "topic": "Conexão no trabalho",
+    "link": "#relato-0"
+  },
+  {
+    "image": "/assets/story-1.svg",
+    "title": "Rafael",
+    "description": "“Enquanto assisto a uma série, meu filho estuda e minha filha ouve música. A internet faz parte da nossa rotina.”",
+    "heading": "Cada um no seu momento.",
+    "topic": "Uso simultâneo",
+    "link": "#relato-1"
+  },
+  {
+    "image": "/assets/story-2.svg",
+    "title": "Beatriz",
+    "description": "“Gostei da ideia de alguém explicar onde colocar o roteador e como aproveitar melhor o sinal, sem complicar.”",
+    "heading": "Uma explicação faz diferença.",
+    "topic": "Orientação na instalação",
+    "link": "#relato-2"
+  },
+  {
+    "image": "/assets/story-3.svg",
+    "title": "Lucas",
+    "description": "“Meu escritório fica mais afastado da sala. Ter um ponto de conexão mais perto faz sentido para a minha casa.”",
+    "heading": "Até o cantinho de leitura.",
+    "topic": "Cobertura com mesh",
+    "link": "#relato-3"
+  },
+  {
+    "image": "/assets/story-4.svg",
+    "title": "Camila",
+    "description": "“Entre enviar arquivos e conversar com a equipe, o upload é tão importante para mim quanto o download.”",
+    "heading": "Mais espaço para criar.",
+    "topic": "Envio de arquivos",
+    "link": "#relato-4"
+  },
+  {
+    "image": "/assets/story-5.svg",
+    "title": "André",
+    "description": "“Para mim, um bom atendimento é entender o que está acontecendo e receber uma orientação clara.”",
+    "heading": "Saber qual é o próximo passo.",
+    "topic": "Clareza no suporte",
+    "link": "#relato-5"
+  }
+]

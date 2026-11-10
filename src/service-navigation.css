@@ -1,0 +1,18 @@
+:is(#service-nav-root, #plans-nav-root){display:block;position:relative;padding:20px 0;isolation:isolate}
+:is(#service-nav-root, #plans-nav-root) .gooey-nav-container{--color-1:#142c4d;--color-2:#254a73;--color-3:#3c628b;--color-4:#7e98bc}
+:is(#service-nav-root, #plans-nav-root) .gooey-nav-container nav ul{gap:20px;padding:0;flex-wrap:wrap;text-shadow:none}
+:is(#service-nav-root, #plans-nav-root) .gooey-nav-container nav ul li{background:#142c4d;color:#fff;border-radius:999px}
+:is(#service-nav-root, #plans-nav-root) .gooey-nav-container nav ul li a{position:relative;display:block;z-index:1;padding:14px 22px;color:inherit;background:transparent;border-radius:999px;min-height:48px;font-size:14px;white-space:nowrap}
+:is(#service-nav-root, #plans-nav-root) .gooey-nav-container nav ul li.active{background:#254a73;color:#fff;box-shadow:inset 0 0 0 1px #7e98bc}
+:is(#service-nav-root, #plans-nav-root) .gooey-nav-container nav ul li::after{display:none}
+:is(#service-nav-root, #plans-nav-root) .gooey-nav-container nav ul li a:focus-visible{outline:2px solid var(--text);outline-offset:5px}
+:is(#service-nav-root, #plans-nav-root) .effect.text{display:none}
+:is(#service-nav-root, #plans-nav-root) .effect.filter{mix-blend-mode:normal}
+:is(#service-nav-root, #plans-nav-root) .effect.filter::before{display:none}
+:is(#service-nav-root, #plans-nav-root) .effect.filter::after{background:#254a73}
+:is(#service-nav-root, #plans-nav-root) .gooey-filter-defs{position:absolute;pointer-events:none}
+@media(max-width:640px){:is(#service-nav-root, #plans-nav-root) .gooey-nav-container nav ul{width:100%;gap:12px;flex-direction:column}:is(#service-nav-root, #plans-nav-root) .gooey-nav-container nav ul li a{text-align:center}:is(#service-nav-root, #plans-nav-root){overflow:clip;overflow-clip-margin:20px}}
+@media(prefers-reduced-motion:reduce){:is(#service-nav-root, #plans-nav-root) .effect{display:none}:is(#service-nav-root, #plans-nav-root) .gooey-nav-container nav ul li{transition:none}}
+
+/* Keep real link labels above the filtered particle layer. */
+:is(#service-nav-root, #plans-nav-root) .gooey-nav-container nav{z-index:2}

@@ -1,9 +1,13 @@
+import './service-navigation';
+import './scroll-text';
+import './page-blur';
+import './navigation';
 import { useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import SpecularButton from './components/SpecularButton';
 import './specular-buttons.css';
 
-const selector = 'button, a.button, .section-nav a, .faq-list summary';
+const selector = 'button, a.button, .section-nav a, .faq-list summary, .bubble-menu-items .pill-link';
 const ids = new WeakMap();
 let nextId = 0;
 
@@ -11,7 +15,7 @@ function SpecularButtons() {
   const [targets, setTargets] = useState([]);
   useEffect(() => {
     const discover = () => {
-      const next = [...document.querySelectorAll(selector)];
+      const next = [...document.querySelectorAll(selector)].filter(target => !target.closest('.elo-folder, .gooey-nav-container, .swap-window-close'));
       next.forEach(target => {
         target.classList.add('has-specular');
         if (!ids.has(target)) ids.set(target, nextId++);
@@ -19,10 +23,16 @@ function SpecularButtons() {
       setTargets(previous => previous.length === next.length && previous.every((target, index) => target === next[index]) ? previous : next);
     };
     discover();
-    // Include dynamically mounted folder files and dialog controls.
-    const mutations = new MutationObserver(discover);
+    // Include dynamic controls, while leaving folder animations free of shader overlays.
+    let frame = 0;
+    const mutations = new MutationObserver(records => {
+      const changed = records.some(record => [...record.addedNodes, ...record.removedNodes].some(node =>
+        node.nodeType === 1 && (node.matches(selector) || node.querySelector(selector))
+      ));
+      if (changed && !frame) frame = requestAnimationFrame(() => { frame = 0; discover(); });
+    });
     mutations.observe(document.body, { childList: true, subtree: true });
-    return () => mutations.disconnect();
+    return () => { mutations.disconnect(); cancelAnimationFrame(frame); };
   }, []);
   const [visible, setVisible] = useState([]);
   const [enabled, setEnabled] = useState(false);

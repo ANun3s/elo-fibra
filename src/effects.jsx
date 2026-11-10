@@ -1,3 +1,5 @@
+import './service-gallery';
+import './faq-footer';
 import './plan-folders';
 import { Component, useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
@@ -21,7 +23,8 @@ function WarpMoment({ stage }) {
   const [ready, setReady] = useState(false);
   const [backgroundVisible, setBackgroundVisible] = useState(true);
   const [pageVisible, setPageVisible] = useState(() => !document.hidden);
-  const active = !reduced && !failed;
+  const effectsVisible = !reduced && backgroundVisible && pageVisible;
+  const active = effectsVisible && !failed;
   const backgroundHost = document.getElementById('letter-glitch-root');
 
   useEffect(() => {
@@ -72,7 +75,7 @@ function WarpMoment({ stage }) {
   }, [active, ready, stage]);
 
   return <>
-    {!reduced && backgroundVisible && pageVisible && typography && backgroundHost && createPortal(
+    {effectsVisible && typography && backgroundHost && createPortal(
       <EffectBoundary>
         <LetterGlitch
           key={typography.theme}

@@ -1,0 +1,22 @@
+/* Paragraph typography and real word wrapping keep long answers readable. */
+.faq-list .faq-fold-answer { display: block; font-size: inherit; line-height: inherit; letter-spacing: normal; white-space: pre-wrap; }
+.faq-list p { margin: 0; padding: 8px 4px 25px; }
+.faq-fold-answer .fold-text-piece { will-change: auto; }
+
+/* The requested bubble navigation stays inside the existing footer. */
+#footer-bubble-root { display: block; padding: 20px 0 42px; }
+.bubble-menu-items.inline { position: relative; inset: auto; display: block; padding: 24px 18px; margin: -24px -18px; overflow: clip; z-index: auto; pointer-events: auto; }
+.bubble-menu-items.inline .pill-list { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-auto-rows: 1fr; gap: 22px; max-width: none; padding: 0; margin: 0; }
+.bubble-menu-items.inline .pill-list .pill-col { min-width: 0; margin: 0; }
+.bubble-menu-items.inline .pill-link { min-height: 86px; height: auto; padding: 20px 16px; font-size: clamp(14px, 1.5vw, 19px); font-weight: 500; line-height: 1.4; overflow: visible; border: 1px solid var(--action-border); box-shadow: 0 8px 22px #0000000d; will-change: auto; }
+.bubble-menu-items.inline .pill-label { height: auto; line-height: inherit; white-space: normal; text-align: center; will-change: auto; }
+.bubble-menu-items.inline .pill-link:focus-visible { outline: 3px solid var(--brand); outline-offset: 6px; }
+@media (max-width: 700px) {
+  .bubble-menu-items.inline .pill-list { grid-template-columns: 1fr; gap: 16px; }
+  .bubble-menu-items.inline .pill-link { min-height: 66px; font-size: 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bubble-menu-items.inline .pill-link, .bubble-menu-items.inline .pill-link:hover, .bubble-menu-items.inline .pill-link:active { transform: none; }
+}
+
+.faq-list details[data-closing="true"] summary > span[aria-hidden="true"]:not(.specular-button__fx) { transform: rotate(0deg); }

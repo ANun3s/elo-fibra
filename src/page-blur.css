@@ -1,0 +1,19 @@
+.elo-page-blur {
+  position: fixed;
+  inset: auto 0 0;
+  height: clamp(20px, 3vh, 32px);
+  opacity: 0;
+  transition: opacity 180ms ease;
+  z-index: 15;
+  pointer-events: none;
+}
+.elo-page-blur, .elo-page-blur * { pointer-events: none !important; }
+/* Keep dialogs and keyboard interaction entirely clear. */
+body:has(dialog[open]) .elo-page-blur,
+body:has(:focus-visible) .elo-page-blur { visibility: hidden; }
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .elo-page-blur { display: none; }
+}
+@media (prefers-reduced-motion: reduce), (prefers-reduced-transparency: reduce), print {
+  .elo-page-blur { display: none; }
+}
