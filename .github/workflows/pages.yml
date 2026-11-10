@@ -1,0 +1,46 @@
+name: Deploy elo to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'dist/**'
+      - 'scripts/prepare-pages.mjs'
+      - '.github/workflows/pages.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Configure Pages
+        id: pages
+        uses: actions/configure-pages@v5
+      # dist contains the site's committed, prebuilt React bundles.
+      # Do not publish repository docs or ask Jekyll to interpret the README.
+      - name: Prepare site and project-relative URLs
+        env:
+          PAGES_BASE_PATH: ${{ steps.pages.outputs.base_path }}/
+        run: node scripts/prepare-pages.mjs
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4
