@@ -37,6 +37,8 @@ const FoldText = ({
   perspective = 700,
   creaseShading = 0.55,
   trigger = 'mount',
+  reversed = false,
+  onReverseComplete,
   fontSize = 80,
   fontWeight = 800,
   color = '#f7f2e8',
@@ -185,6 +187,16 @@ const FoldText = ({
     hingeConfig.rotateX,
     hingeConfig.rotateY
   ]);
+
+  useEffect(() => {
+    const timeline = timelineRef.current;
+    if (!timeline) return;
+    timeline.eventCallback('onReverseComplete', onReverseComplete || null);
+    if (reversed) {
+      if (timeline.time() === 0) onReverseComplete?.();
+      else timeline.timeScale(1.5).reverse();
+    } else timeline.timeScale(1).play();
+  }, [reversed, onReverseComplete]);
 
   const rootStyle = {
     '--fold-text-font-size': typeof fontSize === 'number' ? `${fontSize}px` : fontSize,

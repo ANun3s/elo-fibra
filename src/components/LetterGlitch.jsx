@@ -112,7 +112,7 @@ const LetterGlitch = ({
   };
 
   const drawLetters = () => {
-    if (!context.current || letters.current.length === 0) return;
+    if (!canvasRef.current || !context.current || letters.current.length === 0) return;
     const ctx = context.current;
     const { width, height } = canvasRef.current.getBoundingClientRect();
     ctx.clearRect(0, 0, width, height);
@@ -169,6 +169,7 @@ const LetterGlitch = ({
   };
 
   const animate = () => {
+    if (!canvasRef.current || !context.current) return;
     const now = Date.now();
     if (now - lastGlitchTime.current >= glitchSpeed) {
       updateLetters();
@@ -208,6 +209,7 @@ const LetterGlitch = ({
       clearTimeout(resizeTimeout);
       cancelAnimationFrame(animationRef.current);
       window.removeEventListener('resize', handleResize);
+      context.current = null;
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [glitchSpeed, smooth]);

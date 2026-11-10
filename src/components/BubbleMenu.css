@@ -169,11 +169,11 @@
   box-sizing: border-box;
 }
 
-.bubble-menu-items .pill-list .pill-col:nth-child(4):nth-last-child(2) {
+.bubble-menu-items:not(.inline) .pill-list .pill-col:nth-child(4):nth-last-child(2) {
   margin-left: calc(100% / 6);
 }
 
-.bubble-menu-items .pill-list .pill-col:nth-child(4):last-child {
+.bubble-menu-items:not(.inline) .pill-list .pill-col:nth-child(4):last-child {
   margin-left: calc(100% / 3);
 }
 
